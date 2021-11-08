@@ -1,0 +1,61 @@
+
+<div class="container">
+    <div>
+        <h1>Formulario</h1>
+    </div>
+    <form [formGroup]="formulario">
+        <div class="form-group">
+    
+            <div>
+                <label>Nombre</label>
+                <!-- INPUT para el campo nombre-->
+                <input
+                    type="text"
+                    placeholder="Ingresa tu nombre"
+                    formControlName ="nombre"
+                >
+                <!-- Mostrar el error para el campo nombre-->
+                <small *ngIf=" formularioEjemplo.nombre?.errors?.required && formularioEjemplo.nombre.touched ">
+                    Error en el campo nombre
+                </small>
+                <small *ngIf=" formularioEjemplo.nombre?.errors?.minlength">
+                    Debe ser mayor a 10
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label>Apellido</label>
+                <!-- INPUT para el campo apellido-->
+                <input
+                    type="text"
+                    placeholder="Ingresa tu apellido"
+                    formControlName ="apellido"
+                    required
+                >
+                <!-- Mostrar el error para el campo apellido-->
+                <small *ngIf=" formularioEjemplo.apellido?.errors?.required && formularioEjemplo.apellido.touched ">
+                    Error en el campo apellido
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <button 
+                class="btn btn-primary" 
+                type="submit"
+                (click)="validarDatos()"
+                [disabled]="!formulario.valid"
+                >Enviar</button>
+            </div>
+        </div>
+        
+        
+    
+    </form>
+</div>
+
+
+
+
+
