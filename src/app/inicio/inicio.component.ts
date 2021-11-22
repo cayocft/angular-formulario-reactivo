@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// Importamos componentes para formulario
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+//agregar el servicio
+import { FormularioService } from '../servicios/formulario.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,29 +10,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
-
-  //Declaramos una variable que capturará los datos del formulario
-  formulario: any;
-
-  //debemos instanciarlo en el constructor
-  constructor(private fb:FormBuilder) { }
-
-  //Inicializar formulario reactivo con sus reglas
+  formulario:any;
+  
+  constructor(private fb:FormBuilder, private serviceFormulario: FormularioService) {  
+  }
   ngOnInit(): void {
     this.formulario = this.fb.group({
-      nombre:['',[Validators.required, Validators.minLength(10)]],
-      apellido:['',Validators.required]
+      campo1:['',Validators.required],
+      campo2:[''],
     })
+    
   }
 
-  //obtener los las validaciones
-  get formularioEjemplo(){
+  get formularioReactivo() {
     return this.formulario.controls;
   }
 
-  //Activación del boton cuando se validen los campos
-  validarDatos(){
-    console.log(this.formularioEjemplo);
+  //Función que se activa con el botón del formulario
+  enviarDatos(){
+    //subscribe: es un Observavble, permite transmitir datos asincróna y sincrónica
+    this.serviceFormulario.crear_datosFormulario(this.formulario.value).subscribe(
+      (response:any)=>{
+        if(response.registro){
+          alert("Datos guardados exitosamente");
+          console.log(response)
+        }else{
+          alert("Datos no registrados")
+        }
+      },
+      error=>{
+        console.log(error)
+        alert("error al registrar")
+      }
+    )
   }
 
 }
