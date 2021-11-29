@@ -3,17 +3,28 @@
         <h1>Mostrar datos Dos Campos</h1>
     </div>
     <div>
+      <div>
+        <button type="button" class="btn btn-primary btn-round"
+        routerLink=''> Volver a Inicio</button>
+    </div>
+    </div>
+    <div>
         <table class="table">
             <thead>
               <tr>
                 <th scope="col">Campo1</th>
                 <th scope="col">Campo2</th>
+                <th scope="col">Acciones <i class="bi bi-trash"></i></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let datos_dosCampos of datos_formulario">        
                 <td>{{datos_dosCampos.campo1}}</td>
                 <td>{{datos_dosCampos.campo2}}</td>
+                <td> <button type="button" class="btn btn-danger btn-round" 
+                  (click)="eliminarDosCampos(datos_dosCampos._id)"> Eliminar
+                  
+                </button></td>
               </tr>
               
             </tbody>
