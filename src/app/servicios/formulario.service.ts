@@ -26,6 +26,11 @@ export class FormularioService {
     return this.http.get(`${this.url_backend}/obtener-registros`);
   }
 
+  eliminarDosCampos(id_registroForm:any){
+    return this.http.delete(`${this.url_backend}/eliminar-registro/${id_registroForm}`);
+  }
+
+  
 }
 
 

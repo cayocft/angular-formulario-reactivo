@@ -9,7 +9,7 @@ import { FormularioService } from '../servicios/formulario.service';
 export class MostrarDosCamposComponent implements OnInit {
 
   datos_formulario:any;
-
+  
   constructor(private servicioFormulario: FormularioService) { }
 
   ngOnInit(): void {
@@ -27,5 +27,25 @@ export class MostrarDosCamposComponent implements OnInit {
       }        
     );
   }
+
+  eliminarDosCampos(id_registroForm:any){
+    
+    this.servicioFormulario.eliminarDosCampos(id_registroForm).subscribe(
+      (response:any) =>{
+        if(response.registroForms.deletedCount > 0){
+          alert("Registro eliminado");
+          this.obtenerDatosDosCampos();
+        }else{
+          alert("No se ha podido eliminado el registro");
+        }
+      },
+      error => {
+        console.log(error)
+        alert("hay errores");
+      }
+    );
+  }
+
+
 
 }
